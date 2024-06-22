@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.UI;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,14 +9,20 @@ public class ScreenManager : MonoBehaviour
 
     private ScreenBase _openedScreen;
 
-    public T Open<T>() where T : ScreenBase
+    public TScreen Open<TScreen, TIntent>(TIntent intent) where TScreen : ScreenBase where TIntent : EmptyIntent
     {
-        var type = typeof(T);
-        if (type != typeof(ScreenBase))
+        var screen = Open<TScreen>();
+        if(screen is IIntentContainer<TIntent> screenWithIntent)
         {
-            throw new System.ArrayTypeMismatchException($"Type {type} is not screen type!");
+            screenWithIntent.SetIntent(intent);
         }
 
+        return screen;
+    }
+
+    public TScreen Open<TScreen>() where TScreen : ScreenBase
+    {
+        var type = typeof(TScreen);
         var screen = _registeredScreens.FirstOrDefault(x => x.GetType() == type);
 
         if(screen == null)
@@ -31,6 +38,6 @@ public class ScreenManager : MonoBehaviour
         _openedScreen = screen;
         screen.Open();
 
-        return (T)screen;
+        return (TScreen)screen;
     }
 }

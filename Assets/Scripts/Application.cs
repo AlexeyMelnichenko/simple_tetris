@@ -1,16 +1,24 @@
+using Assets.Scripts.UI;
 using UnityEngine;
 
 public class Application : MonoBehaviour
 {
     [SerializeField] private ScreenManager _screenManager;
+    [SerializeField] private Game _gamePrefab;
 
-    private void Start()
+    private async void Start()
     {
-        _screenManager.Open<LobbyScreen>();
+        var lobbyScreen = _screenManager.Open<LobbyScreen>();
+        var result = await lobbyScreen.Result;
+
+        if(result == ScreenResult.Ok)
+        {
+            StartGame();
+        }
     }
 
     public void StartGame()
     {
-
+        _screenManager.Open<GameScreen, GameScreenIntent>(new GameScreenIntent(_gamePrefab));
     }
 }
