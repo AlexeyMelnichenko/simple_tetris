@@ -2250,6 +2250,8 @@ MonoBehaviour:
   _gameViewRoot: {fileID: 355872855}
   _gameViewScale: {x: 70, y: 70, z: 70}
   _gameViewPosition: {x: -315, y: 620, z: 0}
+  _scoreText: {fileID: 102489941}
+  _linesText: {fileID: 171145368}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

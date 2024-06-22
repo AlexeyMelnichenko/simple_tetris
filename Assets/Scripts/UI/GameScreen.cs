@@ -5,9 +5,11 @@ namespace Assets.Scripts.UI
 {
     public class GameScreen : ScreenWithIntent<GameScreenIntent>
     {
+        [Header("Game view settings")]
         [SerializeField] private Transform _gameViewRoot;
         [SerializeField] private Vector3 _gameViewScale;
         [SerializeField] private Vector3 _gameViewPosition;
+        [Header("UI")]
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private TextMeshProUGUI _linesText;
         private Game _game;
